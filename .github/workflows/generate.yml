@@ -32,7 +32,7 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
         with:
-          title: Generation updates
+          title: "Generation updates based on github.com/golang/tools@${{ steps.new-commit-hash.outputs.commit-hash }}"
           commit-message: "build(deps): generate based on github.com/golang/tools@${{ steps.new-commit-hash.outputs.commit-hash }}"
           branch: pull-tools-updates
           delete-branch: true
