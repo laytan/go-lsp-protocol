@@ -46,4 +46,7 @@ cp $SOURCE/LICENSE LICENSE
 echo -en "module github.com/laytan/go-lsp-protocol\n\ngo $GO_VERSION\n" > go.mod
 go mod tidy
 
+cd tmp
+git log -n 1 --pretty=format:"%H" > ../.tools_commit_hash
+
 rm -rf tmp
