@@ -41,4 +41,4 @@ jobs:
 
             Bumps from [${{ steps.old-commit-hash.outputs.commit-hash }}](https://github.com/golang/tools/commit/${{ steps.old-commit-hash.outputs.commit-hash }}) to [${{ steps.new-commit-hash.outputs.commit-hash }}](https://github.com/golang/tools/commit/${{ steps.new-commit-hash.outputs.commit-hash }}).
 
-            [Compare diff of the commits](https://github.com/golang/tools/compare/${{ steps.old-commit-hash.outputs.commit-hash }}..${{ steps.new-commit-hash.outputs.commit-hash }})
+            [Compare diff of the commits](https://github.com/golang/tools/compare/${{ steps.old-commit-hash.outputs.commit-hash }}...${{ steps.new-commit-hash.outputs.commit-hash }})
