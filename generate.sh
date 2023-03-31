@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-GO_VERSION=1.20
+GO_VERSION=1.18
 
 set -euxo pipefail
+
+echo "PWD: $PWD"
 
 if [ -d pkg ]; then
     rm -rf pkg
@@ -19,6 +21,7 @@ fi
 
 git clone --depth 1 https://github.com/golang/tools tmp
 SOURCE=tmp
+ls $SOURCE
 
 mkdir -p pkg/lsp
 
