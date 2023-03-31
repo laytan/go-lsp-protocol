@@ -38,8 +38,8 @@ cp -R $SOURCE/gopls/internal/lsp/protocol pkg/lsp/protocol
 cp -R $SOURCE/gopls/internal/lsp/safetoken pkg/lsp/safetoken
 cp -R $SOURCE/gopls/internal/span pkg/span
 
-find pkg/ -type f -name '*.go' -exec sed -i '' -e 's#golang\.org/x/tools/gopls/internal#github\.com/laytan/go-lsp-protocol/pkg#g' {} \;
-find pkg/ -type f -name '*.go' -exec sed -i '' -e 's#golang\.org/x/tools/internal#github\.com/laytan/go-lsp-protocol/pkg#g' {} \;
+find pkg/ -type f -name '*.go' -exec sed -i -e 's#golang\.org/x/tools/gopls/internal#github\.com/laytan/go-lsp-protocol/pkg#g' {} \;
+find pkg/ -type f -name '*.go' -exec sed -i -e 's#golang\.org/x/tools/internal#github\.com/laytan/go-lsp-protocol/pkg#g' {} \;
 
 cp $SOURCE/LICENSE LICENSE
 
