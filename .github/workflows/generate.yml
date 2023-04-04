@@ -25,11 +25,17 @@ jobs:
       - name: Generate
         run: ./generate.sh
 
+      # Checks if the pkg folder has changed.
+      - name: Check if changed
+        id: changed
+        run: git diff --exit-code pkg && echo ::set-output name=code::$?
+
       - name: Read new tools commit hash
         id: new-commit-hash
         run: echo ::set-output name=commit-hash::$(cat .tools_commit_hash)
 
       - name: Create PR
+        if: steps.changed.code == '1'
         uses: peter-evans/create-pull-request@v4
         with:
           title: "Generation updates based on github.com/golang/tools@${{ steps.new-commit-hash.outputs.commit-hash }}"
