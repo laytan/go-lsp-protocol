@@ -39,7 +39,7 @@ jobs:
         run: echo ::set-output name=commit-hash::$(cat .tools_commit_hash)
 
       - name: Create PR
-        if: steps.changed.code == '1'
+        if: steps.changed.outputs.code == '1'
         uses: peter-evans/create-pull-request@v4
         with:
           title: "Generation updates based on github.com/golang/tools@${{ steps.new-commit-hash.outputs.commit-hash }}"
