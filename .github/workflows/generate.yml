@@ -28,7 +28,11 @@ jobs:
       # Checks if the pkg folder has changed.
       - name: Check if changed
         id: changed
-        run: git diff --exit-code pkg && echo ::set-output name=code::$?
+        run: |
+          git diff --exit-code pkg
+          echo ::set-output name=code::$?
+        # Set own shell so '-e' is not set, that would exit when git diff exits with code 1.
+        shell: bash {0}
 
       - name: Read new tools commit hash
         id: new-commit-hash
