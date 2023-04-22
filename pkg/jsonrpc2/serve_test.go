@@ -12,9 +12,12 @@ import (
 	"time"
 
 	"github.com/laytan/go-lsp-protocol/pkg/stack/stacktest"
+	"github.com/laytan/go-lsp-protocol/pkg/testenv"
 )
 
 func TestIdleTimeout(t *testing.T) {
+	testenv.NeedsLocalhostNet(t)
+
 	stacktest.NoLeak(t)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
