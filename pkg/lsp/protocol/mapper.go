@@ -72,9 +72,9 @@ import (
 	"sync"
 	"unicode/utf8"
 
+	"github.com/laytan/go-lsp-protocol/pkg/bug"
 	"github.com/laytan/go-lsp-protocol/pkg/lsp/safetoken"
 	"github.com/laytan/go-lsp-protocol/pkg/span"
-	"github.com/laytan/go-lsp-protocol/pkg/bug"
 )
 
 // A Mapper wraps the content of a file and provides mapping
