@@ -11,18 +11,18 @@ import (
 
 func resetForTesting() {
 	exemplars = nil
-	waiters = nil
+	handlers = nil
 }
 
 func TestListBugs(t *testing.T) {
 	defer resetForTesting()
 
-	Report("bad", nil)
+	Report("bad")
 
 	wantBugs(t, "bad")
 
 	for i := 0; i < 3; i++ {
-		Report(fmt.Sprintf("index:%d", i), nil)
+		Report(fmt.Sprintf("index:%d", i))
 	}
 
 	wantBugs(t, "bad", "index:0")
@@ -44,22 +44,21 @@ func wantBugs(t *testing.T, want ...string) {
 	}
 }
 
-func TestBugNotification(t *testing.T) {
+func TestBugHandler(t *testing.T) {
 	defer resetForTesting()
 
-	Report("unseen", nil)
+	Report("unseen")
 
-	notify1 := Notify()
-	notify2 := Notify()
+	// Both handlers are called, in order of registration, only once.
+	var got string
+	Handle(func(b Bug) { got += "1:" + b.Description })
+	Handle(func(b Bug) { got += "2:" + b.Description })
 
-	Report("seen", Data{"answer": 42})
+	Report("seen")
 
-	for _, got := range []Bug{<-notify1, <-notify2} {
-		if got, want := got.Description, "seen"; got != want {
-			t.Errorf("Saw bug %q, want %q", got, want)
-		}
-		if got, want := got.Data["answer"], 42; got != want {
-			t.Errorf(`bug.Data["answer"] = %v, want %v`, got, want)
-		}
+	Report("again")
+
+	if want := "1:seen2:seen"; got != want {
+		t.Errorf("got %q, want %q", got, want)
 	}
 }
